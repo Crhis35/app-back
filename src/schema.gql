@@ -1,0 +1,138 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateAccountInput {
+  email: String!
+  password: String!
+  role: UserRole!
+}
+
+type CreateAccountOutput {
+  error: String
+  ok: Boolean!
+  token: String
+  user: User
+}
+
+input CreatePlaceInput {
+  description: String!
+  name: String!
+  points: [LPointInput!]!
+}
+
+type CreatePlaceOutput {
+  error: String
+  ok: Boolean!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LPoint {
+  coordinates: [Float!]!
+  type: String!
+}
+
+input LPointInput {
+  coordinates: [Float!]!
+}
+
+input LPointInputType {
+  coordinates: [Float!]!
+  type: String!
+}
+
+type Location {
+  createdAt: DateTime!
+  id: String!
+  place: Place!
+  point: LPoint
+  tags: [Tag!]
+  updatedAt: DateTime!
+}
+
+input LocationInputType {
+  place: PlaceInputType!
+  point: LPointInputType
+}
+
+input LogInInput {
+  email: String!
+  password: String!
+}
+
+type LogInOutput {
+  error: String
+  ok: Boolean!
+  token: String
+  user: User
+}
+
+type Mutation {
+  createPlace(input: CreatePlaceInput!): CreatePlaceOutput!
+  createUser(input: CreateAccountInput!): CreateAccountOutput!
+  login(input: LogInInput!): LogInOutput!
+}
+
+type Place {
+  createdAt: DateTime!
+  description: String!
+  id: String!
+  locations: [Location!]
+  name: String!
+  tags: [Tag!]
+  updatedAt: DateTime!
+}
+
+input PlaceInputType {
+  description: String!
+  locations: [LocationInputType!]
+  name: String!
+}
+
+type Query {
+  hello: String!
+  searchNearPlaces(input: SearchNearPlacesInput!): [SearchNearPlacesOutput!]!
+}
+
+input SearchNearPlacesInput {
+  lat: Float!
+  lng: Float!
+}
+
+type SearchNearPlacesOutput {
+  error: String
+  ok: Boolean!
+  places: [Place!]!
+  totalPages: Float
+  totalResults: Float
+}
+
+type Tag {
+  name: String!
+  value: String!
+}
+
+input TagInput {
+  name: String!
+  value: String!
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  id: String!
+  password: String!
+  role: UserRole!
+  tags: [Tag!]
+  updatedAt: DateTime!
+  verified: Boolean!
+}
+
+enum UserRole {
+  PLACE
+  VISITOR
+}
