@@ -6,6 +6,7 @@ input CreateAccountInput {
   email: String!
   password: String!
   role: UserRole!
+  username: String!
 }
 
 type CreateAccountOutput {
@@ -83,6 +84,7 @@ type Place {
   id: String!
   locations: [Location!]
   name: String!
+  owner: User!
   tags: [Tag!]
   updatedAt: DateTime!
 }
@@ -94,7 +96,7 @@ input PlaceInputType {
 }
 
 type Query {
-  hello: String!
+  me: User!
   searchNearPlaces(input: SearchNearPlacesInput!): [SearchNearPlacesOutput!]!
 }
 
@@ -126,9 +128,11 @@ type User {
   email: String!
   id: String!
   password: String!
+  places: [Place!]!
   role: UserRole!
   tags: [Tag!]
   updatedAt: DateTime!
+  username: String!
   verified: Boolean!
 }
 

@@ -5,10 +5,11 @@ import {
   InputType,
   registerEnumType,
 } from '@nestjs/graphql';
-import { CoreEntity } from 'src/common/entities/core.entity';
-import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { IsBoolean, IsEmail, IsEnum, IsString } from 'class-validator';
+import { Place } from 'src/place/entities/place.entity';
+import { CoreEntity } from 'src/common/entities/core.entity';
 
 export enum UserRole {
   VISITOR = 'VISITOR',
@@ -23,6 +24,11 @@ registerEnumType(UserRole, {
 @InputType('UserInputType', { isAbstract: true })
 @Entity()
 export class User extends CoreEntity {
+  @Field(() => String)
+  @Column({ unique: true })
+  @IsString()
+  username: string;
+
   @Field(() => String)
   @Column({ unique: true })
   @IsEmail()
@@ -42,6 +48,12 @@ export class User extends CoreEntity {
   @Column({ default: false })
   @IsBoolean()
   verified: boolean;
+
+  @Field(() => [Place])
+  @OneToMany(() => Place, (place) => place.owner, {
+    nullable: true,
+  })
+  places: Place[];
 
   @BeforeInsert()
   @BeforeUpdate()
