@@ -54,7 +54,6 @@ describe('UsersService', () => {
         email: 'test@test.com',
       });
       const result = await service.createAccount(createAccountArgs);
-
       expect(result).toMatchObject({
         ok: false,
         error: 'There is a user with that email already',
@@ -88,7 +87,7 @@ describe('UsersService', () => {
       password: 'bs.password',
     };
 
-    it('should fail if user does not exist', async () => {});
+    // it('should fail if user does not exist', async () => {});
 
     it('should fail if password is WRONG', async () => {
       const user = {

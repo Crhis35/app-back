@@ -9,6 +9,12 @@ import { LogInInput, LogInOutput } from './dto/login.dto';
 import { User } from './entities/user.entity';
 import { Verification } from './entities/verification.entity';
 
+/**
+ * Class that handles user related operations.
+ * @author   Crhistian Caraballo
+ * @class   UsersService - UsersService
+ * @constructor Creates an instance of UsersService.
+ */
 @Injectable()
 export class UsersService {
   constructor(
@@ -16,6 +22,11 @@ export class UsersService {
     @InjectRepository(Verification)
     private readonly verifications: Repository<Verification>,
   ) {}
+  /**
+   * validateUser - Validates a user.
+   * @param {LogInInput} input - The input to validate.
+   * @returns {LogInOutput} - The output of the validation.
+   */
   async validateUser({ email, password }: LogInInput): Promise<LogInOutput> {
     try {
       const user = await this.users.findOne({

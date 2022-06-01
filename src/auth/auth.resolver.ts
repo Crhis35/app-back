@@ -20,7 +20,6 @@ export class AuthResolver {
     return this.authService.createAccount(createAccountInput);
   }
 
-  @UseGuards(LocalAuthGuard)
   @Mutation(() => LogInOutput)
   async login(@Args('input') logInInput: LogInInput) {
     return this.authService.login(logInInput);

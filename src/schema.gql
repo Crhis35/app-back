@@ -41,11 +41,6 @@ input LPointInput {
   coordinates: [Float!]!
 }
 
-input LPointInputType {
-  coordinates: [Float!]!
-  type: String!
-}
-
 type Location {
   createdAt: DateTime!
   id: String!
@@ -53,11 +48,6 @@ type Location {
   point: LPoint
   tags: [Tag!]
   updatedAt: DateTime!
-}
-
-input LocationInputType {
-  place: PlaceInputType!
-  point: LPointInputType
 }
 
 input LogInInput {
@@ -87,12 +77,6 @@ type Place {
   owner: User!
   tags: [Tag!]
   updatedAt: DateTime!
-}
-
-input PlaceInputType {
-  description: String!
-  locations: [LocationInputType!]
-  name: String!
 }
 
 type Query {
